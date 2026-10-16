@@ -4,7 +4,7 @@ A Winamp-style skin for HubSpot. Brushed metal, chrome buttons, screws in the co
 
 It's a single Tampermonkey userscript. Purely cosmetic: it only changes how HubSpot looks in your browser and doesn't touch any data.
 
-The story behind it: [Winampify HubSpot](https://klaudgrave.com/notes/LINK-TBD)
+The story behind it: [Winampify HubSpot](https://klaudgrave.com/notes/winampify-hubspot)
 
 ## Setup
 
