@@ -2,7 +2,7 @@
 // @name         HubSpot Y2K — Winamp-era skins for HubSpot
 // @namespace    https://github.com/klaudgrave/hubspot-y2k
 // @license      MIT
-// @version      0.6.0
+// @version      0.6.1
 // @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, and a 16-bit pixel quest look. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
 // @match        https://app.hubspot.com/*
 // @run-at       document-start
@@ -144,13 +144,9 @@ html.fun00s.s-biomech.f-index main{
   border:30px solid transparent !important;border-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cdefs%3E%3ClinearGradient id=%22h%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%231c0d07%22/%3E%3Cstop offset=%22.3%22 stop-color=%22%23d49a6a%22/%3E%3Cstop offset=%22.65%22 stop-color=%22%236e3a20%22/%3E%3Cstop offset=%221%22 stop-color=%22%23150a05%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22v%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%231c0d07%22/%3E%3Cstop offset=%22.3%22 stop-color=%22%23d49a6a%22/%3E%3Cstop offset=%22.65%22 stop-color=%22%236e3a20%22/%3E%3Cstop offset=%221%22 stop-color=%22%23150a05%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22hb%22 x1=%220%22 y1=%221%22 x2=%220%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%231c0d07%22/%3E%3Cstop offset=%22.3%22 stop-color=%22%23d49a6a%22/%3E%3Cstop offset=%22.65%22 stop-color=%22%236e3a20%22/%3E%3Cstop offset=%221%22 stop-color=%22%23150a05%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22vr%22 x1=%221%22 y1=%220%22 x2=%220%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%231c0d07%22/%3E%3Cstop offset=%22.3%22 stop-color=%22%23d49a6a%22/%3E%3Cstop offset=%22.65%22 stop-color=%22%236e3a20%22/%3E%3Cstop offset=%221%22 stop-color=%22%23150a05%22/%3E%3C/linearGradient%3E%3CradialGradient id=%22k%22 cx=%22.38%22 cy=%22.32%22%3E%3Cstop offset=%220%22 stop-color=%22%23f0c9a0%22/%3E%3Cstop offset=%22.5%22 stop-color=%22%23a8683f%22/%3E%3Cstop offset=%221%22 stop-color=%22%232a140c%22/%3E%3C/radialGradient%3E%3CradialGradient id=%22e%22 cx=%22.4%22 cy=%22.35%22%3E%3Cstop offset=%220%22 stop-color=%22%23eaffc0%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%236ee028%22/%3E%3Cstop offset=%221%22 stop-color=%22%230d3a02%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=%22120%22 height=%2222%22 fill=%22url%28%23h%29%22/%3E%3Crect y=%2298%22 width=%22120%22 height=%2222%22 fill=%22url%28%23hb%29%22/%3E%3Crect width=%2222%22 height=%22120%22 fill=%22url%28%23v%29%22/%3E%3Crect x=%2298%22 width=%2222%22 height=%22120%22 fill=%22url%28%23vr%29%22/%3E%3Cg fill=%22%230a0503%22%3E%3Crect x=%2251%22 width=%222%22 height=%2222%22/%3E%3Crect x=%2263%22 width=%222%22 height=%2222%22/%3E%3Crect x=%2251%22 y=%2298%22 width=%222%22 height=%2222%22/%3E%3Crect x=%2263%22 y=%2298%22 width=%222%22 height=%2222%22/%3E%3Crect y=%2251%22 width=%2222%22 height=%222%22/%3E%3Crect y=%2263%22 width=%2222%22 height=%222%22/%3E%3Crect x=%2298%22 y=%2251%22 width=%2222%22 height=%222%22/%3E%3Crect x=%2298%22 y=%2263%22 width=%2222%22 height=%222%22/%3E%3C/g%3E%3Cg stroke=%22%230a0503%22 stroke-width=%222%22 fill=%22url%28%23k%29%22%3E%3Ccircle cx=%2224%22 cy=%2224%22 r=%2222%22/%3E%3Ccircle cx=%2296%22 cy=%2224%22 r=%2222%22/%3E%3Ccircle cx=%2224%22 cy=%2296%22 r=%2222%22/%3E%3Ccircle cx=%2296%22 cy=%2296%22 r=%2222%22/%3E%3C/g%3E%3Cg stroke=%22%23052000%22 stroke-width=%222%22 fill=%22url%28%23e%29%22%3E%3Ccircle cx=%2224%22 cy=%2224%22 r=%228%22/%3E%3Ccircle cx=%2296%22 cy=%2224%22 r=%228%22/%3E%3Ccircle cx=%2224%22 cy=%2296%22 r=%228%22/%3E%3Ccircle cx=%2296%22 cy=%2296%22 r=%228%22/%3E%3C/g%3E%3C/svg%3E") 48 / 30px round !important;border-radius:0 !important;
   background-clip:padding-box !important;box-shadow:none !important;padding:6px 10px !important}
 html.fun00s.s-biomech .fun00s-screw{display:none !important}
-/* side nav: a spine with vertebra buttons, green vein running down it */
+/* side nav: a glowing green spine runs down the plate */
 html.fun00s.s-biomech #hs-vertical-nav{color:var(--f-lime) !important;border:0 !important;box-shadow:inset -3px 0 0 #000 !important;
   background-color:#120a06 !important;background-image:linear-gradient(90deg,transparent 21px,#0d3a02 21px 25px,#4ee01a 25px 27px,#0d3a02 27px 31px,transparent 31px),radial-gradient(ellipse at 0 50%,#2e170d,transparent 70%) !important;background-size:100% 100% !important;background-blend-mode:normal !important}
-html.fun00s.s-biomech #hs-vertical-nav a{display:block;position:relative;margin:5px 6px 5px 40px;padding:6px 10px 6px 14px !important;
-  background:linear-gradient(90deg,#6e3a20,#2a140c) !important;
-  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);box-shadow:inset 0 1px 0 rgba(255,200,150,.5) !important}
-html.fun00s.s-biomech #hs-vertical-nav a::before{content:"";position:absolute;left:-18px;top:50%;width:18px;height:6px;margin-top:-3px;background:linear-gradient(#0d3a02,#4ee01a,#0d3a02)}
 html.fun00s.s-biomech #hs-vertical-nav :is(a,button,span,div,p,li,svg){color:var(--f-lime) !important;font-family:var(--f-head) !important;font-size:11px !important;letter-spacing:1.5px;text-transform:uppercase;text-shadow:0 0 5px var(--f-glow);text-decoration:none !important}
 html.fun00s.s-biomech #hs-vertical-nav :is(a,button):hover,
 html.fun00s.s-biomech #hs-vertical-nav :is([aria-current],[aria-selected=true]){background:linear-gradient(90deg,#2e8a0c,#0d3a02) !important}
@@ -178,6 +174,23 @@ html.fun00s.s-biomech .fun00s-grille{
   border-radius:13px !important;box-shadow:inset 0 2px 3px #000,0 0 8px rgba(110,255,60,.35) !important}
 html.fun00s.s-biomech .fun00s-eq{background:linear-gradient(#050d03,#0f2208);border-color:#150a05 #b87a52 #d9a47c #150a05 !important;border-radius:16px 4px 16px 4px !important;gap:3px}
 html.fun00s.s-biomech .fun00s-eq i{border-radius:3px 3px 1px 1px;background:linear-gradient(90deg,rgba(255,255,255,.35) 0 20%,transparent 20%),linear-gradient(0deg,#1f7004,#6ee028 55%,#d4ff4a);box-shadow:0 0 6px var(--f-glow);animation-timing-function:ease-in-out}
+/* record pages (pixel + biomech): the cards become dark LCD panels, so every label flips to light text */
+html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-transitional-component=Card]:not([data-test-id=middle-pane] *),[data-test-id=middle-pane] [data-transitional-component=Card]){
+  background-image:var(--f-lcd-bg) !important;background-color:var(--f-lcd) !important;background-size:auto !important;background-repeat:repeat !important;background-position:0 0 !important;background-blend-mode:normal !important}
+html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-transitional-component=Card],[data-test-id=left-sidebar],[data-test-id=right-sidebar]) *{text-shadow:none !important}
+:where(html.fun00s:is(.s-pixel,.s-biomech).f-record) [data-transitional-component=Card] :where(p,span,label,li,div,a,dt,dd,strong,small,button){color:var(--f-lime) !important}
+html.fun00s:is(.s-pixel,.s-biomech).f-record [data-transitional-component=Card] :is(h1,h2,h3,h4,h5,h6),
+html.fun00s:is(.s-pixel,.s-biomech).f-record [data-test-id=middle-pane] [data-transitional-component=Card] :is(h1,h2,h3,h4),
+html.fun00s:is(.s-pixel,.s-biomech).f-record [class*=FormControl__StyledFormControlHoverContentContainer] > [class*=FormControl__LabelWrapper],
+html.fun00s:is(.s-pixel,.s-biomech).f-record [class*=FormControl__StyledFormControlHoverContentContainer] > [class*=FormControl__LabelWrapper] *,
+html.fun00s:is(.s-pixel,.s-biomech).f-record [data-test-id^=highlight-property-item-] > :first-child,
+html.fun00s:is(.s-pixel,.s-biomech).f-record [data-test-id^=highlight-property-item-] > :first-child *{color:var(--f-lime-hot) !important;font-family:var(--f-head) !important}
+html.fun00s.s-pixel.f-record [data-transitional-component=Card] :is(h1,h2,h3,h4,h5,h6),
+html.fun00s.s-pixel.f-record [class*=FormControl__LabelWrapper],
+html.fun00s.s-pixel.f-record [class*=FormControl__LabelWrapper] *{font-size:11px !important;line-height:1.6 !important}
+html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-test-id=left-sidebar],[data-test-id=right-sidebar]) a:not([class*=Tile] a){color:var(--f-lime-hot) !important}
+html.fun00s.fun00s.s-pixel.f-record :is([data-transitional-component=Card],[data-test-id=middle-pane]){border-radius:0 !important;border-color:#000 !important;box-shadow:0 0 0 2px #58b858,4px 4px 0 2px #000 !important}
+:where(html.fun00s.s-pixel.f-record) [data-transitional-component=Card] :where(p,span,label,li,div,a,dt,dd,strong,small,button){font-family:var(--f-mono) !important;font-size:18px}
 html.fun00s body{background:#0b0c0d radial-gradient(ellipse at 50% 0%,#1d2124,#050606 70%) !important}
 html.fun00s div:has(> main){background:transparent !important}
 
@@ -565,6 +578,13 @@ html.fun00s [class*=Popover__StyledPopoverContainer] :is(hr,[role=separator]){bo
 html.fun00s [class*=Popover__StyledPopoverContainer] input{background:transparent !important;border:1px solid rgba(var(--f-rgb),.5) !important}
 html.fun00s [class*=Popover__StyledPopoverContainer] [data-button-use=primary]{background:var(--f-gel) !important}
 html.fun00s [class*=Popover__StyledPopoverContainer] [data-button-use=primary] *{color:var(--f-on-gel) !important;text-shadow:none}
+/* account menu: HubSpot gives it a plain white panel with no stable hook, so it is tagged from JS (see menus()) */
+html.fun00s [data-fun00s-menu]{background:var(--f-lcd-bg) !important;border:2px solid !important;border-color:var(--f-inset-border) !important;box-shadow:0 10px 24px rgba(0,0,0,.75),0 0 0 1px var(--f-ring) !important}
+html.fun00s [data-fun00s-menu] *{background-color:transparent !important;color:var(--f-lime) !important;font-family:var(--f-mono) !important;opacity:1 !important;text-shadow:0 0 4px var(--f-glow)}
+html.fun00s [data-fun00s-menu] :is(a,button,[role=menuitem]):hover{background:rgba(var(--f-rgb),.16) !important}
+html.fun00s [data-fun00s-menu] :is(a,button):hover *{color:var(--f-pale) !important}
+html.fun00s [data-fun00s-menu] :is(hr,[role=separator]){border-color:rgba(var(--f-rgb),.3) !important;background:rgba(var(--f-rgb),.3) !important}
+html.fun00s [data-fun00s-menu] :is(a,button) :is(svg,path){fill:currentColor}
 
 /* ============ decorations (injected nodes) ============ */
 html:not(.fun00s) .fun00s-deco{display:none !important}
@@ -714,6 +734,20 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
     nowPlaying();
   }, true);
 
+  // The account menu is a plain white panel with no stable hook: find it through its preferences link
+  // and tag the outermost white ancestor that is still menu-sized.
+  function menus() {
+    for (const a of document.querySelectorAll('a[href*="user-preferences"]:not([data-fun00s-m])')) {
+      a.setAttribute('data-fun00s-m', '');
+      let best = null;
+      for (let e = a, i = 0; e && e !== document.body && i < 14; e = e.parentElement, i++) {
+        if (e.getBoundingClientRect().width > 600) break;
+        if (getComputedStyle(e).backgroundColor === 'rgb(255, 255, 255)') best = e;
+      }
+      if (best) best.setAttribute('data-fun00s-menu', '');
+    }
+  }
+
   function decorate() {
     applyClasses();
     if (!isOn()) return;
@@ -721,6 +755,7 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
     grille();
     marquee();
     stage();
+    menus();
     if (isIndex()) {
       screws(document.querySelector('main'));
       eq();
