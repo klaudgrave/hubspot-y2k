@@ -15,6 +15,8 @@ The story behind it: [Winampify HubSpot](https://klaudgrave.com/notes/winampify-
 
 Press **Alt+Shift+Y** (**⌥⇧Y** on Mac) to switch the skin on and off.
 
+Press **Alt+Shift+T** (**⌥⇧T** on Mac) to switch between the lime and copper themes.
+
 If nothing changes, open the DevTools console and run `!!window.__fun00s`. If it says `false`, Tampermonkey isn't running the script, so check step 2.
 
 ## What gets skinned
