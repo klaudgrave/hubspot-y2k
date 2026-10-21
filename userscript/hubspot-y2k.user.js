@@ -2,7 +2,7 @@
 // @name         HubSpot Y2K — Winamp-era skins for HubSpot
 // @namespace    https://github.com/klaudgrave/hubspot-y2k
 // @license      MIT
-// @version      0.7.0
+// @version      0.7.1
 // @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, a 16-bit pixel quest look, and a classic Winamp 2 look with a stormy dark-blue twin. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
 // @match        https://app.hubspot.com/*
 // @run-at       document-start
@@ -243,6 +243,9 @@ html.fun00s.s-winamp.f-index [data-test-id^=cdb-column-header-]{
   font:400 15px/16px var(--f-head) !important;letter-spacing:3px;text-transform:uppercase;color:#e6eaf8 !important;
   background:repeating-linear-gradient(0deg,var(--w-line) 0 1px,transparent 1px 3px) 6px 50%/calc(50% - 96px) 9px no-repeat,repeating-linear-gradient(0deg,var(--w-line) 0 1px,transparent 1px 3px) calc(100% - 6px) 50%/calc(50% - 96px) 9px no-repeat,var(--w-title) !important;
   border:1px solid;border-color:var(--f-bevel)}
+/* main is a flex row, so the caption is pinned to its top edge instead of becoming a column of its own */
+html.fun00s.s-winamp.f-index main{position:relative !important;padding-top:28px !important}
+html.fun00s.s-winamp.f-index main::before{position:absolute;left:6px;right:6px;top:6px;margin:0;z-index:3}
 html.fun00s.s-winamp.f-index [data-test-id^=cdb-column-header-]{content:none;height:auto;min-height:16px;padding:0 6px !important;margin:0 0 6px !important;font-size:13px !important;
   background:var(--w-title) !important}
 html.fun00s.s-winamp.f-index [data-test-id^=cdb-column-header-] *{color:#e6eaf8 !important;font-family:var(--f-head) !important;letter-spacing:2px;text-transform:uppercase;text-shadow:none !important}
