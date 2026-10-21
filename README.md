@@ -15,7 +15,7 @@ The story behind it: [Winampify HubSpot](https://klaudgrave.com/notes/winampify-
 
 Press **Alt+Shift+Y** (**⌥⇧Y** on Mac) to switch the skin on and off.
 
-Press **Alt+Shift+T** (**⌥⇧T** on Mac) to switch between the lime and copper themes.
+Press **Alt+Shift+T** (**⌥⇧T** on Mac) to cycle through the looks: chrome with a lime LCD, brushed copper with an amber LCD, and a 16-bit pixel quest look.
 
 If nothing changes, open the DevTools console and run `!!window.__fun00s`. If it says `false`, Tampermonkey isn't running the script, so check step 2.
 
@@ -30,6 +30,6 @@ Settings, editors and the rest of HubSpot only get the top bar and nav for now.
 
 ## Heads up
 
-HubSpot changes its UI all the time, so parts of this will break now and then. The script loads two fonts from Google Fonts; nothing else leaves your browser.
+HubSpot changes its UI all the time, so parts of this will break now and then. The script loads its fonts from Google Fonts; nothing else leaves your browser.
 
 Not affiliated with HubSpot or Winamp.

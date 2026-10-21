@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         HubSpot Y2K — chrome and copper skins for HubSpot
+// @name         HubSpot Y2K — Winamp-era skins for HubSpot
 // @namespace    https://github.com/klaudgrave/hubspot-y2k
 // @license      MIT
-// @version      0.4.0
-// @description  Chrome, brushed metal and lime LCD for HubSpot, plus a brushed-copper theme with an amber LCD. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); switch theme with Alt+Shift+T (⌥⇧T on Mac).
+// @version      0.5.0
+// @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, and a 16-bit pixel quest look. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
 // @match        https://app.hubspot.com/*
 // @run-at       document-start
 // @grant        none
@@ -16,8 +16,10 @@
 
   const ROOT = document.documentElement;
   const STORE_KEY = 'fun00s:on';
-  const THEME_KEY = 'fun00s:theme';   // 'lime' (default) | 'copper'
-  const theme = () => { try { return localStorage.getItem(THEME_KEY) === 'copper' ? 'copper' : 'lime'; } catch { return 'lime'; } };
+  const THEME_KEY = 'fun00s:theme';
+  // A look is a skin (html.s-<skin>, structure) plus an optional theme (html.f-<theme>, colour tokens).
+  const LOOKS = { lime: {}, copper: { theme: 'copper' }, pixel: { skin: 'pixel' } };
+  const look = () => { try { const v = localStorage.getItem(THEME_KEY); return v in LOOKS ? v : 'lime'; } catch { return 'lime'; } };
   const isOn = () => { try { return localStorage.getItem(STORE_KEY) !== '0'; } catch { return true; } };
 
   /* ------------------------------------------------------------------
@@ -68,6 +70,52 @@ html.fun00s.f-copper button[data-test-id=hs-global-toolbar-copilot-list-item] sv
 html.fun00s.f-copper.f-index [data-test-id=cdb-card] :has(> [class*=Tag__ContentWrapper] [data-test-id=activity-chip-upcoming-empty]){
   border-color:rgba(255,92,70,.75) !important;background:rgba(255,92,70,.08) !important;box-shadow:0 0 6px rgba(255,92,70,.35) !important}
 html.fun00s.f-copper.f-index [data-test-id=cdb-card] [class*=Tag__ContentWrapper]:has([data-test-id=activity-chip-upcoming-empty]) *{color:#ff8a70 !important;text-shadow:0 0 5px rgba(255,92,70,.7) !important}
+/* ============ skin: pixel (html.s-pixel) — flat 16-bit look; tokens + structure overrides ============ */
+html.fun00s.s-pixel{
+  --f-rgb:248,216,88; --f-rgb2:176,120,24;
+  --f-lime:#f8d858; --f-lime-hot:#fff0a0; --f-lime-mid:#f0c840; --f-pale:#fff6d0;
+  --f-lcd:#080818; --f-lcd2:#10103a; --f-ink:#0a0a28;
+  --f-on-gel:#2a1000; --f-gel-edge:#000; --f-gel-ring:#fff0a0; --f-eq-mid:#58a8f8;
+  --f-tab-on:#080818; --f-tab:linear-gradient(#e8d8a0 0 50%,#c8b070 50%);
+  --f-bevel:#000 #000 #000 #000; --f-ring:#58b858; --f-plate:#3a8a3a;
+  --f-glow:transparent; --f-dim:rgba(248,216,88,.22);
+  --f-mono:"VT323","Lucida Console",monospace; --f-head:"Press Start 2P","VT323",monospace; --f-ui:"VT323",Tahoma,sans-serif;
+  --f-brush:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' shape-rendering='crispEdges'%3E%3Crect width='16' height='16' fill='%23fff' fill-opacity='0'/%3E%3Crect width='8' height='8' fill='%23fff' fill-opacity='.07'/%3E%3Crect x='8' y='8' width='8' height='8' fill='%23fff' fill-opacity='.07'/%3E%3C/svg%3E");
+  --f-sheen:linear-gradient(#2c6a2c,#2c6a2c);
+  --f-lcd-bg:linear-gradient(#10103a,#080818);
+  --f-chrome:linear-gradient(#e8d8a0 0 50%,#c8b070 50%);
+  --f-gel:linear-gradient(#f8e878 0 50%,#d8a020 50%);
+  --f-dark:#1c4020;
+  --f-inset-border:#000 #000 #000 #000;
+  --f-dark-ring:0 0 0 2px #58b858,0 0 0 4px #000;
+}
+html.fun00s.s-pixel body{background:#0f2a14 !important}
+html.fun00s.s-pixel :is(#hs-global-toolbar,#hs-vertical-nav),
+html.fun00s.s-pixel.f-index main{background-size:16px 16px,100% 100% !important;background-blend-mode:normal !important}
+/* flat pixels: no rounded corners, no blur, hard drop shadows instead of glows */
+html.fun00s.s-pixel *,html.fun00s.s-pixel *::before,html.fun00s.s-pixel *::after{border-radius:0 !important}
+html.fun00s.s-pixel *{text-shadow:2px 2px 0 #000 !important}
+html.fun00s.s-pixel :is(button,[data-button-use]),html.fun00s.s-pixel :is(button,[data-button-use]) *{text-shadow:none !important}
+html.fun00s.s-pixel :is(button,[data-button-use=primary],[data-test-id=cdb-card],[data-test-id^=framework-data-column-]){
+  border-color:#000 !important;box-shadow:0 0 0 2px #58b858,4px 4px 0 2px #000 !important}
+html.fun00s.s-pixel :is(#hs-global-toolbar,#hs-vertical-nav){border-color:#000 !important;box-shadow:0 4px 0 #000 !important}
+/* side nav: dark navy panel, gold pixel-font labels, hover/current items flip to a gold bar */
+html.fun00s.s-pixel #hs-vertical-nav{color:var(--f-lime) !important;background:#080818 !important;background-image:none !important;border-right:4px solid #000 !important;box-shadow:inset -4px 0 0 #58b858 !important}
+html.fun00s.s-pixel #hs-vertical-nav :is(a,button,span,div,p,li,svg){color:var(--f-lime) !important;font-family:var(--f-head) !important;font-size:10px !important;line-height:1.6 !important;letter-spacing:0}
+html.fun00s.s-pixel #hs-vertical-nav :is(a,button):hover,
+html.fun00s.s-pixel #hs-vertical-nav :is(a,button):hover *,
+html.fun00s.s-pixel #hs-vertical-nav :is([aria-current],[aria-selected=true]),
+html.fun00s.s-pixel #hs-vertical-nav :is([aria-current],[aria-selected=true]) *{background:var(--f-lime) !important;color:var(--f-on-gel) !important;text-shadow:none !important}
+html.fun00s.s-pixel #hs-vertical-nav svg{fill:currentColor !important}
+html.fun00s.s-pixel [data-test-id=framework-data-table-container] *{font-size:18px !important}
+html.fun00s.s-pixel [data-test-id=cdb-card] *{font-size:17px !important}
+html.fun00s.s-pixel .fun00s-marquee,html.fun00s.s-pixel .fun00s-marquee *{font-size:20px !important}
+/* rivets become square nails, the grille becomes a row of hearts, the equalizer becomes stepped blue meters */
+html.fun00s.s-pixel .fun00s-screw{width:8px;height:8px;background:#e8d8a0 !important;box-shadow:2px 2px 0 #000 !important}
+html.fun00s.s-pixel .fun00s-grille{
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='20' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M2 2h6v2h2v2h4V4h2V2h6v2h2v6h-2v2h-2v2h-2v2h-2v2h-2v2h-2v-2h-2v-2H8v-2H6v-2H4v-2H2V4z'/%3E%3Cpath fill='%23e8302a' d='M4 4h4v2h2v2h4V6h2V4h4v4h-2v2h-2v2h-2v2h-2v2h-2v-2H10v-2H8v-2H6v-2H4z'/%3E%3Cpath fill='%23fff' d='M6 6h2v2H6z'/%3E%3C/svg%3E") 0 50%/24px 20px repeat-x !important;
+  box-shadow:none !important}
+html.fun00s.s-pixel .fun00s-eq i{background:repeating-linear-gradient(0deg,#58a8f8 0 4px,transparent 4px 6px);box-shadow:none;animation-timing-function:steps(6)}
 html.fun00s body{background:#0b0c0d radial-gradient(ellipse at 50% 0%,#1d2124,#050606 70%) !important}
 html.fun00s div:has(> main){background:transparent !important}
 
@@ -507,7 +555,7 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
       const l = document.createElement('link');
       l.id = 'fun00s-fonts';
       l.rel = 'stylesheet';
-      l.href = 'https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@800&display=swap';
+      l.href = 'https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@800&family=Press+Start+2P&family=VT323&display=swap';
       document.head.appendChild(l);
     }
   }
@@ -517,7 +565,11 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
 
   function applyClasses() {
     ROOT.classList.toggle('fun00s', isOn());
-    ROOT.classList.toggle('f-copper', theme() === 'copper');
+    const { skin, theme } = LOOKS[look()];
+    for (const k of Object.keys(LOOKS)) {
+      ROOT.classList.toggle('f-' + k, LOOKS[k].theme === theme && !!theme);
+      ROOT.classList.toggle('s-' + k, LOOKS[k].skin === skin && !!skin);
+    }
     ROOT.classList.toggle('f-index', isIndex());
     ROOT.classList.toggle('f-record', isRecord());
   }
@@ -637,14 +689,15 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
   };
   if (document.body) boot(); else document.addEventListener('DOMContentLoaded', boot);
 
-  // Alt+Shift+Y toggles the skin, Alt+Shift+T switches between lime and copper
+  // Alt+Shift+Y toggles the skin, Alt+Shift+T cycles through the looks
   document.addEventListener('keydown', e => {
     if (!e.altKey || !e.shiftKey) return;
     if (e.code === 'KeyY') {
       try { localStorage.setItem(STORE_KEY, isOn() ? '0' : '1'); } catch {}
       decorate();
     } else if (e.code === 'KeyT') {
-      try { localStorage.setItem(THEME_KEY, theme() === 'copper' ? 'lime' : 'copper'); } catch {}
+      const ids = Object.keys(LOOKS);
+      try { localStorage.setItem(THEME_KEY, ids[(ids.indexOf(look()) + 1) % ids.length]); } catch {}
       decorate();
     }
   });
