@@ -2,8 +2,8 @@
 // @name         HubSpot Y2K — Winamp-era skins for HubSpot
 // @namespace    https://github.com/klaudgrave/hubspot-y2k
 // @license      MIT
-// @version      0.6.2
-// @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, and a 16-bit pixel quest look. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
+// @version      0.7.0
+// @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, a 16-bit pixel quest look, and a classic Winamp 2 look with a stormy dark-blue twin. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
 // @match        https://app.hubspot.com/*
 // @run-at       document-start
 // @grant        none
@@ -18,7 +18,7 @@
   const STORE_KEY = 'fun00s:on';
   const THEME_KEY = 'fun00s:theme';
   // A look is a skin (html.s-<skin>, structure) plus an optional theme (html.f-<theme>, colour tokens).
-  const LOOKS = { lime: {}, copper: { theme: 'copper' }, biomech: { skin: 'biomech' }, pixel: { skin: 'pixel' } };
+  const LOOKS = { lime: {}, copper: { theme: 'copper' }, biomech: { skin: 'biomech' }, pixel: { skin: 'pixel' }, classic: { skin: 'winamp' }, storm: { skin: 'winamp', theme: 'storm' } };
   const look = () => { try { const v = localStorage.getItem(THEME_KEY); return v in LOOKS ? v : 'lime'; } catch { return 'lime'; } };
   const isOn = () => { try { return localStorage.getItem(STORE_KEY) !== '0'; } catch { return true; } };
 
@@ -178,23 +178,104 @@ html.fun00s.s-biomech .fun00s-grille{
 html.fun00s.s-biomech .fun00s-eq{background:linear-gradient(#050d03,#0f2208);border-color:#150a05 #b87a52 #d9a47c #150a05 !important;border-radius:16px 4px 16px 4px !important;gap:3px}
 html.fun00s.s-biomech .fun00s-eq i{border-radius:3px 3px 1px 1px;background:linear-gradient(90deg,rgba(255,255,255,.35) 0 20%,transparent 20%),linear-gradient(0deg,#1f7004,#6ee028 55%,#d4ff4a);box-shadow:0 0 6px var(--f-glow);animation-timing-function:ease-in-out}
 /* record pages (pixel + biomech): the cards become dark LCD panels, so every label flips to light text */
-html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-transitional-component=Card]:not([data-test-id=middle-pane] *),[data-test-id=middle-pane] [data-transitional-component=Card],[data-test-id=middle-pane]){
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record :is([data-transitional-component=Card]:not([data-test-id=middle-pane] *),[data-test-id=middle-pane] [data-transitional-component=Card],[data-test-id=middle-pane]){
   background-image:var(--f-lcd-bg) !important;background-color:var(--f-lcd) !important;background-size:auto !important;background-repeat:repeat !important;background-position:0 0 !important;background-blend-mode:normal !important}
-html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-transitional-component=Card],[data-test-id=left-sidebar],[data-test-id=right-sidebar]) *{text-shadow:none !important}
-:where(html.fun00s:is(.s-pixel,.s-biomech).f-record) :is([data-transitional-component=Card],[data-test-id=middle-pane]) :where(p,span,label,li,div,a,dt,dd,strong,small,button,h1,h2,h3,h4,h5,h6){color:var(--f-lime) !important}
-:where(html.fun00s:is(.s-pixel,.s-biomech).f-record) [data-test-id=middle-pane] :where(div,section,article,ul,li){border-color:rgba(var(--f-rgb),.4) !important}
-html.fun00s:is(.s-pixel,.s-biomech).f-record [data-transitional-component=Card] :is(h1,h2,h3,h4,h5,h6),
-html.fun00s:is(.s-pixel,.s-biomech).f-record [data-test-id=middle-pane] [data-transitional-component=Card] :is(h1,h2,h3,h4),
-html.fun00s:is(.s-pixel,.s-biomech).f-record [class*=FormControl__StyledFormControlHoverContentContainer] > [class*=FormControl__LabelWrapper],
-html.fun00s:is(.s-pixel,.s-biomech).f-record [class*=FormControl__StyledFormControlHoverContentContainer] > [class*=FormControl__LabelWrapper] *,
-html.fun00s:is(.s-pixel,.s-biomech).f-record [data-test-id^=highlight-property-item-] > :first-child,
-html.fun00s:is(.s-pixel,.s-biomech).f-record [data-test-id^=highlight-property-item-] > :first-child *{color:var(--f-lime-hot) !important;font-family:var(--f-head) !important}
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record :is([data-transitional-component=Card],[data-test-id=left-sidebar],[data-test-id=right-sidebar]) *{text-shadow:none !important}
+:where(html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record) :is([data-transitional-component=Card],[data-test-id=middle-pane]) :where(p,span,label,li,div,a,dt,dd,strong,small,button,h1,h2,h3,h4,h5,h6){color:var(--f-lime) !important}
+:where(html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record) [data-test-id=middle-pane] :where(div,section,article,ul,li){border-color:rgba(var(--f-rgb),.4) !important}
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record [data-transitional-component=Card] :is(h1,h2,h3,h4,h5,h6),
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record [data-test-id=middle-pane] [data-transitional-component=Card] :is(h1,h2,h3,h4),
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record [class*=FormControl__StyledFormControlHoverContentContainer] > [class*=FormControl__LabelWrapper],
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record [class*=FormControl__StyledFormControlHoverContentContainer] > [class*=FormControl__LabelWrapper] *,
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record [data-test-id^=highlight-property-item-] > :first-child,
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record [data-test-id^=highlight-property-item-] > :first-child *{color:var(--f-lime-hot) !important;font-family:var(--f-head) !important}
 html.fun00s.s-pixel.f-record [data-transitional-component=Card] :is(h1,h2,h3,h4,h5,h6),
 html.fun00s.s-pixel.f-record [class*=FormControl__LabelWrapper],
 html.fun00s.s-pixel.f-record [class*=FormControl__LabelWrapper] *{font-size:11px !important;line-height:1.6 !important}
-html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-test-id=left-sidebar],[data-test-id=right-sidebar]) a:not([class*=Tile] a){color:var(--f-lime-hot) !important}
+html.fun00s:is(.s-pixel,.s-biomech,.s-winamp).f-record :is([data-test-id=left-sidebar],[data-test-id=right-sidebar]) a:not([class*=Tile] a){color:var(--f-lime-hot) !important}
+html.fun00s.fun00s.s-winamp.f-record :is([data-transitional-component=Card],[data-test-id=middle-pane]){border-radius:0 !important;border:2px solid !important;border-color:var(--f-bevel) !important;box-shadow:none !important}
 html.fun00s.fun00s.s-pixel.f-record :is([data-transitional-component=Card],[data-test-id=middle-pane]){border-radius:0 !important;border-color:#000 !important;box-shadow:0 0 0 2px #58b858,4px 4px 0 2px #000 !important}
 :where(html.fun00s.s-pixel.f-record) [data-transitional-component=Card] :where(p,span,label,li,div,a,dt,dd,strong,small,button){font-family:var(--f-mono) !important;font-size:18px}
+/* ============ skin: winamp (html.s-winamp) — Winamp 2 windows: title bars, bevels, black playlist rows ============ */
+html.fun00s.s-winamp{
+  --f-rgb:0,224,0; --f-rgb2:0,120,0;
+  --f-lime:#00e000; --f-lime-hot:#7dff7d; --f-lime-mid:#00c800; --f-pale:#c8ffc8;
+  --f-lcd:#000; --f-lcd2:#000; --f-ink:#0a0c14;
+  --f-on-gel:#000; --f-gel-edge:#14172a; --f-gel-ring:#fff0a0; --f-eq-mid:#e0e000;
+  --f-tab-on:#000; --f-tab:linear-gradient(#b4bbd0,#7d86a2);
+  --f-bevel:#cfd5e8 #14172a #14172a #cfd5e8; --f-ring:#14172a; --f-plate:#4a526e;
+  --f-glow:rgba(0,224,0,.35); --f-dim:rgba(0,224,0,.2);
+  --f-mono:"Share Tech Mono","Lucida Console",monospace; --f-head:"VT323","Share Tech Mono",monospace; --f-ui:Tahoma,Verdana,Arial,sans-serif;
+  --f-brush:linear-gradient(rgba(255,255,255,.05),rgba(0,0,0,.1));
+  --f-sheen:linear-gradient(#5b6382,#3f4660);
+  --f-lcd-bg:#000;
+  --f-chrome:linear-gradient(#bcc3d8,#7d86a2);
+  --f-gel:linear-gradient(#f4dc5a,#b89a10);
+  --f-dark:linear-gradient(#3a4268,#1b2038);
+  --f-inset-border:#14172a #cfd5e8 #cfd5e8 #14172a;
+  --w-title:linear-gradient(#3a4268,#1b2038); --w-line:#d0b030; --w-select:#0000c6; --w-hover:#101070;
+}
+/* storm theme: dark blue-steel with lightning, yellow accents, same Winamp structure */
+html.fun00s.s-winamp.f-storm{
+  --f-lime:#3cdc3c; --f-lime-hot:#ffe21a; --f-lime-mid:#7ae87a; --f-pale:#dfffd8; --f-eq-mid:#ffe21a;
+  --f-plate:#0e1540;
+  --f-bevel:#8d9bd6 #04061a #04061a #8d9bd6; --f-inset-border:#04061a #8d9bd6 #8d9bd6 #04061a; --f-ring:#04061a;
+  --f-brush:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cdefs%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='3'/%3E%3C/filter%3E%3C/defs%3E%3Cg fill='none' stroke-linejoin='round'%3E%3Cpolyline points='330,0 305,70 345,95 300,170 335,190 290,300' stroke='%237fb4ff' stroke-width='8' opacity='.55' filter='url%28%23b%29'/%3E%3Cpolyline points='330,0 305,70 345,95 300,170 335,190 290,300' stroke='%23eaf5ff' stroke-width='2'/%3E%3Cpolyline points='345,95 405,128 388,172' stroke='%23eaf5ff' stroke-width='1.5'/%3E%3Cpolyline points='90,0 110,60 80,110' stroke='%239cc4ff' stroke-width='1.5' opacity='.6'/%3E%3C/g%3E%3C/svg%3E");
+  --f-sheen:radial-gradient(ellipse at 30% 0,#27368a,transparent 60%),linear-gradient(#141d4a,#070b22);
+  --f-chrome:linear-gradient(#a9b0c4,#4c5470); --f-gel:linear-gradient(#fff07a,#d9b400);
+  --f-tab:linear-gradient(#a9b0c4,#4c5470);
+  --f-dark:linear-gradient(#1b2660,#070b22); --w-title:linear-gradient(#1b2660,#070b22); --w-line:#ffe21a; --w-select:#1c2ccc; --w-hover:#0c1260;
+}
+html.fun00s.s-winamp body{background:#080b1c !important}
+html.fun00s.s-winamp.f-storm body{background:#02030c !important}
+/* flat, square, no glow */
+html.fun00s.s-winamp *,html.fun00s.s-winamp *::before,html.fun00s.s-winamp *::after{border-radius:0 !important}
+html.fun00s.s-winamp :is(#hs-global-toolbar,#hs-vertical-nav),html.fun00s.s-winamp.f-index main{background-blend-mode:overlay,normal !important}
+html.fun00s.s-winamp #hs-global-toolbar{border-bottom:2px solid #14172a !important;box-shadow:inset 0 1px 0 #cfd5e8,0 2px 0 #000 !important}
+html.fun00s.s-winamp #hs-vertical-nav{border-right:2px solid #14172a !important;box-shadow:inset 1px 0 0 #cfd5e8,inset -1px 0 0 #000 !important}
+html.fun00s.s-winamp :is(button,[data-button-use]){border:2px solid !important;border-color:var(--f-bevel) !important;box-shadow:none !important;font-family:var(--f-ui) !important}
+html.fun00s.s-winamp :is(button,[data-button-use]):active{border-color:#14172a #cfd5e8 #cfd5e8 #14172a !important}
+html.fun00s.s-winamp .fun00s-screw{display:none !important}
+/* title bars: striped Winamp caption on the main window and on every board column */
+html.fun00s.s-winamp.f-index main::before,
+html.fun00s.s-winamp.f-index [data-test-id^=cdb-column-header-]{
+  content:"HUBSPOT PLAYLIST";display:block;height:16px;margin:0 0 8px;text-align:center;
+  font:400 15px/16px var(--f-head) !important;letter-spacing:3px;text-transform:uppercase;color:#e6eaf8 !important;
+  background:repeating-linear-gradient(0deg,var(--w-line) 0 1px,transparent 1px 3px) 6px 50%/calc(50% - 96px) 9px no-repeat,repeating-linear-gradient(0deg,var(--w-line) 0 1px,transparent 1px 3px) calc(100% - 6px) 50%/calc(50% - 96px) 9px no-repeat,var(--w-title) !important;
+  border:1px solid;border-color:var(--f-bevel)}
+html.fun00s.s-winamp.f-index [data-test-id^=cdb-column-header-]{content:none;height:auto;min-height:16px;padding:0 6px !important;margin:0 0 6px !important;font-size:13px !important;
+  background:var(--w-title) !important}
+html.fun00s.s-winamp.f-index [data-test-id^=cdb-column-header-] *{color:#e6eaf8 !important;font-family:var(--f-head) !important;letter-spacing:2px;text-transform:uppercase;text-shadow:none !important}
+/* playlist: black window, green rows, blue selection, white current track */
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table-container]{border:2px solid !important;border-color:var(--f-inset-border) !important;box-shadow:none !important;background:#000 !important}
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table-container] *{font-family:var(--f-ui) !important;font-size:13px !important;text-shadow:none !important}
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table] th,
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table] th *{font-family:var(--f-head) !important;font-size:15px !important;letter-spacing:2px;text-transform:uppercase;color:var(--f-lime-hot) !important}
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table] th{background:var(--w-title) !important;border-bottom:1px solid #14172a !important}
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table] td{border-color:transparent !important}
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table] tbody tr:hover > *{background:var(--w-hover) !important}
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table] tr[data-fun00s-playing] > *{background:var(--w-select) !important;border:0 !important;box-shadow:none !important}
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table] tr[data-fun00s-playing] > *,
+html.fun00s.s-winamp.f-index [data-test-id=framework-data-table] tr[data-fun00s-playing] > * *{color:#fff !important}
+/* board: columns are playlist windows, cards are numbered playlist rows */
+html.fun00s.s-winamp.f-index [data-test-id^=framework-data-column-]{counter-reset:wpl;background:#000 !important;border:2px solid !important;border-color:var(--f-bevel) !important;box-shadow:none !important;padding:3px !important}
+html.fun00s.s-winamp.f-index [data-test-id=cdb-card]{counter-increment:wpl;background:#000 !important;border:0 !important;border-bottom:1px solid #1a1a1a !important;box-shadow:none !important}
+html.fun00s.s-winamp.f-index [data-test-id=cdb-card]::before{content:counter(wpl) ". ";font:13px var(--f-ui);color:var(--f-lime)}
+html.fun00s.s-winamp.f-index :is([data-test-id^=framework-data-column-],[data-test-id=cdb-card]){border-radius:0 !important;color:var(--f-lime) !important}
+html.fun00s.s-winamp.f-index [data-test-id^=cdb-column-header-]{color:#e6eaf8 !important}
+html.fun00s.s-winamp.f-index [data-test-id=cdb-card]:hover{background:var(--w-hover) !important;box-shadow:none !important}
+html.fun00s.s-winamp.f-index [data-test-id=cdb-card] *{font-family:var(--f-ui) !important;text-shadow:none !important}
+/* side nav: a library tree — black rows, green text, blue selection */
+html.fun00s.s-winamp #hs-vertical-nav{color:var(--f-lime) !important}
+html.fun00s.s-winamp #hs-vertical-nav :is(a,button,span,div,p,li,svg){color:var(--f-lime) !important;font-family:var(--f-ui) !important;font-size:12px !important;text-shadow:none !important}
+html.fun00s.s-winamp #hs-vertical-nav :is(a,button){background:#000 !important;border:0 !important;border-bottom:1px solid #1a1a1a !important}
+html.fun00s.s-winamp #hs-vertical-nav :is(a,button):hover,html.fun00s.s-winamp #hs-vertical-nav :is(a,button):hover *{background:var(--w-hover) !important;color:#fff !important}
+html.fun00s.s-winamp #hs-vertical-nav li.isHighlighted > :is(a,button),html.fun00s.s-winamp #hs-vertical-nav li.isHighlighted > :is(a,button) *{background:var(--w-select) !important;color:#fff !important}
+html.fun00s.s-winamp #hs-vertical-nav svg{fill:currentColor !important}
+/* the grille becomes the transport row, the equalizer a classic spectrum analyser */
+html.fun00s.s-winamp .fun00s-grille{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='26' shape-rendering='crispEdges'%3E%3Crect x='1' y='2' width='17' height='22' fill='%23aab1c8' stroke='%2314172a'/%3E%3Cpath d='M2 23V3h15' stroke='%23eef1ff' fill='none'/%3E%3Cg fill='%23000'%3E%3Crect x='5' y='8' width='2' height='10'/%3E%3Cpolygon points='14,8 8,13 14,18'/%3E%3C/g%3E%3Crect x='20' y='2' width='17' height='22' fill='%23aab1c8' stroke='%2314172a'/%3E%3Cpath d='M21 23V3h15' stroke='%23eef1ff' fill='none'/%3E%3Cg fill='%23000'%3E%3Cpolygon points='26,7 33,13 26,19'/%3E%3C/g%3E%3Crect x='39' y='2' width='17' height='22' fill='%23aab1c8' stroke='%2314172a'/%3E%3Cpath d='M40 23V3h15' stroke='%23eef1ff' fill='none'/%3E%3Cg fill='%23000'%3E%3Crect x='44' y='8' width='3' height='10'/%3E%3Crect x='49' y='8' width='3' height='10'/%3E%3C/g%3E%3Crect x='58' y='2' width='17' height='22' fill='%23aab1c8' stroke='%2314172a'/%3E%3Cpath d='M59 23V3h15' stroke='%23eef1ff' fill='none'/%3E%3Cg fill='%23000'%3E%3Crect x='63' y='8' width='8' height='10'/%3E%3C/g%3E%3Crect x='77' y='2' width='17' height='22' fill='%23aab1c8' stroke='%2314172a'/%3E%3Cpath d='M78 23V3h15' stroke='%23eef1ff' fill='none'/%3E%3Cg fill='%23000'%3E%3Cpolygon points='81,8 87,13 81,18'/%3E%3Crect x='88' y='8' width='2' height='10'/%3E%3C/g%3E%3C/svg%3E") 0 0/96px 26px no-repeat !important;box-shadow:none !important}
+html.fun00s.s-winamp .fun00s-eq{background:#000;border:2px solid;border-color:var(--f-inset-border) !important;box-shadow:none;gap:1px}
+html.fun00s.s-winamp .fun00s-eq i{background:repeating-linear-gradient(0deg,transparent 0 1px,#000 1px 2px),linear-gradient(0deg,#00c800 0 50%,#e0e000 50% 75%,#e03000 75%);box-shadow:none;animation-timing-function:steps(8)}
 html.fun00s body{background:#0b0c0d radial-gradient(ellipse at 50% 0%,#1d2124,#050606 70%) !important}
 html.fun00s div:has(> main){background:transparent !important}
 
@@ -657,10 +738,8 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
   function applyClasses() {
     ROOT.classList.toggle('fun00s', isOn());
     const { skin, theme } = LOOKS[look()];
-    for (const k of Object.keys(LOOKS)) {
-      ROOT.classList.toggle('f-' + k, LOOKS[k].theme === theme && !!theme);
-      ROOT.classList.toggle('s-' + k, LOOKS[k].skin === skin && !!skin);
-    }
+    for (const k of ['copper', 'storm']) ROOT.classList.toggle('f-' + k, theme === k);
+    for (const k of ['biomech', 'pixel', 'winamp']) ROOT.classList.toggle('s-' + k, skin === k);
     ROOT.classList.toggle('f-index', isIndex());
     ROOT.classList.toggle('f-record', isRecord());
   }

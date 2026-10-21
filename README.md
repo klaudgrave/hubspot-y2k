@@ -15,7 +15,7 @@ The story behind it: [Winampify HubSpot](https://klaudgrave.com/notes/winampify-
 
 Press **Alt+Shift+Y** (**⌥⇧Y** on Mac) to switch the skin on and off.
 
-Press **Alt+Shift+T** (**⌥⇧T** on Mac) to cycle through the looks: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, and a 16-bit pixel quest look.
+Press **Alt+Shift+T** (**⌥⇧T** on Mac) to cycle through the looks: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, a 16-bit pixel quest look, and a classic Winamp 2 look with a stormy dark-blue twin.
 
 If nothing changes, open the DevTools console and run `!!window.__fun00s`. If it says `false`, Tampermonkey isn't running the script, so check step 2.
 
