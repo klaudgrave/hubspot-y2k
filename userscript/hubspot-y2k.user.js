@@ -2,7 +2,7 @@
 // @name         HubSpot Y2K — Winamp-era skins for HubSpot
 // @namespace    https://github.com/klaudgrave/hubspot-y2k
 // @license      MIT
-// @version      0.6.1
+// @version      0.6.2
 // @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, and a 16-bit pixel quest look. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
 // @match        https://app.hubspot.com/*
 // @run-at       document-start
@@ -86,7 +86,7 @@ html.fun00s.s-pixel{
   --f-chrome:linear-gradient(#e8d8a0 0 50%,#c8b070 50%);
   --f-gel:linear-gradient(#f8e878 0 50%,#d8a020 50%);
   --f-dark:#1c4020;
-  --f-inset-border:#000 #000 #000 #000;
+  --f-inset-border:#58b858 #58b858 #58b858 #58b858;
   --f-dark-ring:0 0 0 2px #58b858,0 0 0 4px #000;
 }
 html.fun00s.s-pixel body{background:#0f2a14 !important}
@@ -94,8 +94,7 @@ html.fun00s.s-pixel :is(#hs-global-toolbar,#hs-vertical-nav),
 html.fun00s.s-pixel.f-index main{background-size:16px 16px,100% 100% !important;background-blend-mode:normal !important}
 /* flat pixels: no rounded corners, no blur, hard drop shadows instead of glows */
 html.fun00s.s-pixel *,html.fun00s.s-pixel *::before,html.fun00s.s-pixel *::after{border-radius:0 !important}
-html.fun00s.s-pixel *{text-shadow:2px 2px 0 #000 !important}
-html.fun00s.s-pixel :is(button,[data-button-use]),html.fun00s.s-pixel :is(button,[data-button-use]) *{text-shadow:none !important}
+html.fun00s.s-pixel *{text-shadow:none !important}
 html.fun00s.s-pixel :is(button,[data-button-use=primary],[data-test-id=cdb-card],[data-test-id^=framework-data-column-]){
   border-color:#000 !important;box-shadow:0 0 0 2px #58b858,4px 4px 0 2px #000 !important}
 html.fun00s.s-pixel :is(#hs-global-toolbar,#hs-vertical-nav){border-color:#000 !important;box-shadow:0 4px 0 #000 !important}
@@ -107,6 +106,8 @@ html.fun00s.s-pixel #hs-vertical-nav :is(a,button):hover *,
 html.fun00s.s-pixel #hs-vertical-nav :is([aria-current],[aria-selected=true]),
 html.fun00s.s-pixel #hs-vertical-nav :is([aria-current],[aria-selected=true]) *{background:var(--f-lime) !important;color:var(--f-on-gel) !important;text-shadow:none !important}
 html.fun00s.s-pixel #hs-vertical-nav svg{fill:currentColor !important}
+html.fun00s.s-pixel #hs-vertical-nav li.isHighlighted > :is(a,button),
+html.fun00s.s-pixel #hs-vertical-nav li.isHighlighted > :is(a,button) *{color:var(--f-on-gel) !important}
 html.fun00s.s-pixel [data-test-id=framework-data-table-container] *{font-size:18px !important}
 html.fun00s.s-pixel [data-test-id=cdb-card] *{font-size:17px !important}
 html.fun00s.s-pixel .fun00s-marquee,html.fun00s.s-pixel .fun00s-marquee *{font-size:20px !important}
@@ -152,6 +153,8 @@ html.fun00s.s-biomech #hs-vertical-nav :is(a,button):hover,
 html.fun00s.s-biomech #hs-vertical-nav :is([aria-current],[aria-selected=true]){background:linear-gradient(90deg,#2e8a0c,#0d3a02) !important}
 html.fun00s.s-biomech #hs-vertical-nav :is(a,button):hover *,
 html.fun00s.s-biomech #hs-vertical-nav :is([aria-current],[aria-selected=true]) *{color:var(--f-lime-hot) !important}
+html.fun00s.s-biomech #hs-vertical-nav li.isHighlighted > :is(a,button),
+html.fun00s.s-biomech #hs-vertical-nav li.isHighlighted > :is(a,button) *{color:var(--f-on-gel) !important;text-shadow:none !important}
 /* table: ribbed rows, spaced-out Orbitron headers, one organic corner pair */
 html.fun00s.s-biomech.f-index [data-test-id=framework-data-table-container]{border-radius:2px 44px 2px 44px !important}
 html.fun00s.s-biomech.f-index [data-test-id=framework-data-table] th{font-family:var(--f-head) !important;letter-spacing:3px;text-transform:uppercase;font-size:12px !important}
@@ -175,10 +178,11 @@ html.fun00s.s-biomech .fun00s-grille{
 html.fun00s.s-biomech .fun00s-eq{background:linear-gradient(#050d03,#0f2208);border-color:#150a05 #b87a52 #d9a47c #150a05 !important;border-radius:16px 4px 16px 4px !important;gap:3px}
 html.fun00s.s-biomech .fun00s-eq i{border-radius:3px 3px 1px 1px;background:linear-gradient(90deg,rgba(255,255,255,.35) 0 20%,transparent 20%),linear-gradient(0deg,#1f7004,#6ee028 55%,#d4ff4a);box-shadow:0 0 6px var(--f-glow);animation-timing-function:ease-in-out}
 /* record pages (pixel + biomech): the cards become dark LCD panels, so every label flips to light text */
-html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-transitional-component=Card]:not([data-test-id=middle-pane] *),[data-test-id=middle-pane] [data-transitional-component=Card]){
+html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-transitional-component=Card]:not([data-test-id=middle-pane] *),[data-test-id=middle-pane] [data-transitional-component=Card],[data-test-id=middle-pane]){
   background-image:var(--f-lcd-bg) !important;background-color:var(--f-lcd) !important;background-size:auto !important;background-repeat:repeat !important;background-position:0 0 !important;background-blend-mode:normal !important}
 html.fun00s:is(.s-pixel,.s-biomech).f-record :is([data-transitional-component=Card],[data-test-id=left-sidebar],[data-test-id=right-sidebar]) *{text-shadow:none !important}
-:where(html.fun00s:is(.s-pixel,.s-biomech).f-record) [data-transitional-component=Card] :where(p,span,label,li,div,a,dt,dd,strong,small,button){color:var(--f-lime) !important}
+:where(html.fun00s:is(.s-pixel,.s-biomech).f-record) :is([data-transitional-component=Card],[data-test-id=middle-pane]) :where(p,span,label,li,div,a,dt,dd,strong,small,button,h1,h2,h3,h4,h5,h6){color:var(--f-lime) !important}
+:where(html.fun00s:is(.s-pixel,.s-biomech).f-record) [data-test-id=middle-pane] :where(div,section,article,ul,li){border-color:rgba(var(--f-rgb),.4) !important}
 html.fun00s:is(.s-pixel,.s-biomech).f-record [data-transitional-component=Card] :is(h1,h2,h3,h4,h5,h6),
 html.fun00s:is(.s-pixel,.s-biomech).f-record [data-test-id=middle-pane] [data-transitional-component=Card] :is(h1,h2,h3,h4),
 html.fun00s:is(.s-pixel,.s-biomech).f-record [class*=FormControl__StyledFormControlHoverContentContainer] > [class*=FormControl__LabelWrapper],
@@ -578,6 +582,11 @@ html.fun00s [class*=Popover__StyledPopoverContainer] :is(hr,[role=separator]){bo
 html.fun00s [class*=Popover__StyledPopoverContainer] input{background:transparent !important;border:1px solid rgba(var(--f-rgb),.5) !important}
 html.fun00s [class*=Popover__StyledPopoverContainer] [data-button-use=primary]{background:var(--f-gel) !important}
 html.fun00s [class*=Popover__StyledPopoverContainer] [data-button-use=primary] *{color:var(--f-on-gel) !important;text-shadow:none}
+/* floating round buttons (scroll to top, hide/show the side panel): white by default, tagged from JS (see floaters()) */
+html.fun00s [data-fun00s-fab]{background:var(--f-chrome) !important;border:1px solid #2b2e30 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 2px 5px rgba(0,0,0,.7),0 0 8px var(--f-glow) !important}
+html.fun00s [data-fun00s-fab] :is(svg,path){color:var(--f-ink) !important;fill:currentColor !important}
+html.fun00s [data-fun00s-fab]:hover{filter:brightness(1.12)}
+html.fun00s.s-pixel [data-fun00s-fab]{border:2px solid #000 !important;box-shadow:0 0 0 2px #58b858,3px 3px 0 2px #000 !important}
 /* account menu: HubSpot gives it a plain white panel with no stable hook, so it is tagged from JS (see menus()) */
 html.fun00s [data-fun00s-menu]{background:var(--f-lcd-bg) !important;border:2px solid !important;border-color:var(--f-inset-border) !important;box-shadow:0 10px 24px rgba(0,0,0,.75),0 0 0 1px var(--f-ring) !important}
 html.fun00s [data-fun00s-menu] *{background-color:transparent !important;color:var(--f-lime) !important;font-family:var(--f-mono) !important;opacity:1 !important;text-shadow:0 0 4px var(--f-glow)}
@@ -748,6 +757,23 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
     }
   }
 
+  // Floating icon buttons (scroll to top, hide right panel) have no stable hook either: tag small, text-less,
+  // white, absolutely/fixed positioned buttons once.
+  function floaters() {
+    for (const b of document.querySelectorAll('button:not([data-fun00s-f])')) {
+      const r = b.getBoundingClientRect();
+      if (!r.width) continue;                                   // not laid out yet: look again next pass
+      b.setAttribute('data-fun00s-f', '');
+      if (b.textContent.trim() || !b.querySelector('svg') || r.width < 18 || r.width > 60 || r.height < 18 || r.height > 60) continue;
+      let floating = false;
+      for (let e = b, i = 0; e && e !== document.body && i < 3; e = e.parentElement, i++) {
+        const cs = getComputedStyle(e);
+        floating = floating || /^(fixed|absolute|sticky)$/.test(cs.position);
+        if (floating && cs.backgroundColor === 'rgb(255, 255, 255)' && e.getBoundingClientRect().width <= 60) { e.setAttribute('data-fun00s-fab', ''); break; }
+      }
+    }
+  }
+
   function decorate() {
     applyClasses();
     if (!isOn()) return;
@@ -756,6 +782,7 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
     marquee();
     stage();
     menus();
+    floaters();
     if (isIndex()) {
       screws(document.querySelector('main'));
       eq();
