@@ -2,8 +2,8 @@
 // @name         HubSpot Y2K — Winamp-era skins for HubSpot
 // @namespace    https://github.com/klaudgrave/hubspot-y2k
 // @license      MIT
-// @version      0.5.0
-// @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, and a 16-bit pixel quest look. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
+// @version      0.6.0
+// @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, and a 16-bit pixel quest look. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
 // @match        https://app.hubspot.com/*
 // @run-at       document-start
 // @grant        none
@@ -18,7 +18,7 @@
   const STORE_KEY = 'fun00s:on';
   const THEME_KEY = 'fun00s:theme';
   // A look is a skin (html.s-<skin>, structure) plus an optional theme (html.f-<theme>, colour tokens).
-  const LOOKS = { lime: {}, copper: { theme: 'copper' }, pixel: { skin: 'pixel' } };
+  const LOOKS = { lime: {}, copper: { theme: 'copper' }, biomech: { skin: 'biomech' }, pixel: { skin: 'pixel' } };
   const look = () => { try { const v = localStorage.getItem(THEME_KEY); return v in LOOKS ? v : 'lime'; } catch { return 'lime'; } };
   const isOn = () => { try { return localStorage.getItem(STORE_KEY) !== '0'; } catch { return true; } };
 
@@ -116,6 +116,68 @@ html.fun00s.s-pixel .fun00s-grille{
   background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='20' shape-rendering='crispEdges'%3E%3Cpath fill='%23000' d='M2 2h6v2h2v2h4V4h2V2h6v2h2v6h-2v2h-2v2h-2v2h-2v2h-2v2h-2v-2h-2v-2H8v-2H6v-2H4v-2H2V4z'/%3E%3Cpath fill='%23e8302a' d='M4 4h4v2h2v2h4V6h2V4h4v4h-2v2h-2v2h-2v2h-2v2h-2v-2H10v-2H8v-2H6v-2H4z'/%3E%3Cpath fill='%23fff' d='M6 6h2v2H6z'/%3E%3C/svg%3E") 0 50%/24px 20px repeat-x !important;
   box-shadow:none !important}
 html.fun00s.s-pixel .fun00s-eq i{background:repeating-linear-gradient(0deg,#58a8f8 0 4px,transparent 4px 6px);box-shadow:none;animation-timing-function:steps(6)}
+/* ============ skin: biomech (html.s-biomech) — rusted copper hull, green bio-LCD, glowing vials ============ */
+html.fun00s.s-biomech{
+  --f-rgb:110,255,60; --f-rgb2:30,120,10;
+  --f-lime:#7dff3a; --f-lime-hot:#c8ff9a; --f-lime-mid:#9bff5e; --f-pale:#e4ffd0;
+  --f-lcd:#020a02; --f-lcd2:#0a1a06; --f-ink:#1a0d08;
+  --f-on-gel:#041a00; --f-gel-edge:#0d3a02; --f-gel-ring:#b8ff80; --f-eq-mid:#d4ff4a;
+  --f-tab-on:linear-gradient(#0f2208,#030a02); --f-tab:linear-gradient(#d9a070,#6e3f26);
+  --f-bevel:#e0b090 #2a140c #1c0d07 #b27a58; --f-ring:#8a5238; --f-plate:#7a4630;
+  --f-glow:rgba(110,255,60,.6); --f-dim:rgba(110,255,60,.18);
+  --f-brush:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02 0.035' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.02 0 0 0 0 0 0 0 0 1.1 -0.25'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --f-sheen:linear-gradient(100deg,#3b2013 0%,#8f5435 16%,#4e2a1a 32%,#b87a52 50%,#5a3220 68%,#9a6040 84%,#35190e 100%);
+  --f-lcd-bg:repeating-linear-gradient(0deg,rgba(0,0,0,.3) 0 1px,transparent 1px 3px),radial-gradient(ellipse at 30% 20%,rgba(110,255,60,.14),transparent 60%),linear-gradient(#0a1a06,#020a02);
+  --f-chrome:linear-gradient(#e9c3a0 0%,#b5764d 42%,#6e3a20 50%,#a8683f 78%,#d9a47c 100%);
+  --f-gel:linear-gradient(#e4ffb8 0%,#8cf03c 30%,#3fb008 52%,#1f7004 64%,#6fd424 100%);
+  --f-dark:linear-gradient(#5a3624 0%,#2e170d 46%,#120805 54%,#26130a 100%);
+  --f-inset-border:#080302 #7a4a30 #94603f #150a05;
+}
+html.fun00s.s-biomech body{background:#080403 radial-gradient(ellipse at 50% 0%,#2e170d,#040201 72%) !important}
+/* top bar: a hull arch instead of a flat bar — the plate lives on ::before so popovers are not clipped */
+html.fun00s.s-biomech #hs-global-toolbar{position:relative;isolation:isolate;background:none !important;border:0 !important;box-shadow:none !important}
+html.fun00s.s-biomech #hs-global-toolbar::before{content:"";position:absolute;inset:0 0 -10px 0;z-index:-1;
+  background:var(--f-brush),var(--f-sheen);background-blend-mode:overlay,normal;filter:drop-shadow(0 6px 6px rgba(0,0,0,.8));
+  clip-path:polygon(0 0,100% 0,100% 60%,calc(100% - 46px) 100%,66% 100%,61% 78%,39% 78%,34% 100%,46px 100%,0 60%)}
+/* main: a ribcage frame — piped tubes with knuckle joints and glowing eyes at the corners */
+html.fun00s.s-biomech.f-index main{
+  border:30px solid transparent !important;border-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cdefs%3E%3ClinearGradient id=%22h%22 x1=%220%22 y1=%220%22 x2=%220%22 y2=%221%22%3E%3Cstop offset=%220%22 stop-color=%22%231c0d07%22/%3E%3Cstop offset=%22.3%22 stop-color=%22%23d49a6a%22/%3E%3Cstop offset=%22.65%22 stop-color=%22%236e3a20%22/%3E%3Cstop offset=%221%22 stop-color=%22%23150a05%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22v%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%231c0d07%22/%3E%3Cstop offset=%22.3%22 stop-color=%22%23d49a6a%22/%3E%3Cstop offset=%22.65%22 stop-color=%22%236e3a20%22/%3E%3Cstop offset=%221%22 stop-color=%22%23150a05%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22hb%22 x1=%220%22 y1=%221%22 x2=%220%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%231c0d07%22/%3E%3Cstop offset=%22.3%22 stop-color=%22%23d49a6a%22/%3E%3Cstop offset=%22.65%22 stop-color=%22%236e3a20%22/%3E%3Cstop offset=%221%22 stop-color=%22%23150a05%22/%3E%3C/linearGradient%3E%3ClinearGradient id=%22vr%22 x1=%221%22 y1=%220%22 x2=%220%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%231c0d07%22/%3E%3Cstop offset=%22.3%22 stop-color=%22%23d49a6a%22/%3E%3Cstop offset=%22.65%22 stop-color=%22%236e3a20%22/%3E%3Cstop offset=%221%22 stop-color=%22%23150a05%22/%3E%3C/linearGradient%3E%3CradialGradient id=%22k%22 cx=%22.38%22 cy=%22.32%22%3E%3Cstop offset=%220%22 stop-color=%22%23f0c9a0%22/%3E%3Cstop offset=%22.5%22 stop-color=%22%23a8683f%22/%3E%3Cstop offset=%221%22 stop-color=%22%232a140c%22/%3E%3C/radialGradient%3E%3CradialGradient id=%22e%22 cx=%22.4%22 cy=%22.35%22%3E%3Cstop offset=%220%22 stop-color=%22%23eaffc0%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%236ee028%22/%3E%3Cstop offset=%221%22 stop-color=%22%230d3a02%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width=%22120%22 height=%2222%22 fill=%22url%28%23h%29%22/%3E%3Crect y=%2298%22 width=%22120%22 height=%2222%22 fill=%22url%28%23hb%29%22/%3E%3Crect width=%2222%22 height=%22120%22 fill=%22url%28%23v%29%22/%3E%3Crect x=%2298%22 width=%2222%22 height=%22120%22 fill=%22url%28%23vr%29%22/%3E%3Cg fill=%22%230a0503%22%3E%3Crect x=%2251%22 width=%222%22 height=%2222%22/%3E%3Crect x=%2263%22 width=%222%22 height=%2222%22/%3E%3Crect x=%2251%22 y=%2298%22 width=%222%22 height=%2222%22/%3E%3Crect x=%2263%22 y=%2298%22 width=%222%22 height=%2222%22/%3E%3Crect y=%2251%22 width=%2222%22 height=%222%22/%3E%3Crect y=%2263%22 width=%2222%22 height=%222%22/%3E%3Crect x=%2298%22 y=%2251%22 width=%2222%22 height=%222%22/%3E%3Crect x=%2298%22 y=%2263%22 width=%2222%22 height=%222%22/%3E%3C/g%3E%3Cg stroke=%22%230a0503%22 stroke-width=%222%22 fill=%22url%28%23k%29%22%3E%3Ccircle cx=%2224%22 cy=%2224%22 r=%2222%22/%3E%3Ccircle cx=%2296%22 cy=%2224%22 r=%2222%22/%3E%3Ccircle cx=%2224%22 cy=%2296%22 r=%2222%22/%3E%3Ccircle cx=%2296%22 cy=%2296%22 r=%2222%22/%3E%3C/g%3E%3Cg stroke=%22%23052000%22 stroke-width=%222%22 fill=%22url%28%23e%29%22%3E%3Ccircle cx=%2224%22 cy=%2224%22 r=%228%22/%3E%3Ccircle cx=%2296%22 cy=%2224%22 r=%228%22/%3E%3Ccircle cx=%2224%22 cy=%2296%22 r=%228%22/%3E%3Ccircle cx=%2296%22 cy=%2296%22 r=%228%22/%3E%3C/g%3E%3C/svg%3E") 48 / 30px round !important;border-radius:0 !important;
+  background-clip:padding-box !important;box-shadow:none !important;padding:6px 10px !important}
+html.fun00s.s-biomech .fun00s-screw{display:none !important}
+/* side nav: a spine with vertebra buttons, green vein running down it */
+html.fun00s.s-biomech #hs-vertical-nav{color:var(--f-lime) !important;border:0 !important;box-shadow:inset -3px 0 0 #000 !important;
+  background-color:#120a06 !important;background-image:linear-gradient(90deg,transparent 21px,#0d3a02 21px 25px,#4ee01a 25px 27px,#0d3a02 27px 31px,transparent 31px),radial-gradient(ellipse at 0 50%,#2e170d,transparent 70%) !important;background-size:100% 100% !important;background-blend-mode:normal !important}
+html.fun00s.s-biomech #hs-vertical-nav a{display:block;position:relative;margin:5px 6px 5px 40px;padding:6px 10px 6px 14px !important;
+  background:linear-gradient(90deg,#6e3a20,#2a140c) !important;
+  clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%);box-shadow:inset 0 1px 0 rgba(255,200,150,.5) !important}
+html.fun00s.s-biomech #hs-vertical-nav a::before{content:"";position:absolute;left:-18px;top:50%;width:18px;height:6px;margin-top:-3px;background:linear-gradient(#0d3a02,#4ee01a,#0d3a02)}
+html.fun00s.s-biomech #hs-vertical-nav :is(a,button,span,div,p,li,svg){color:var(--f-lime) !important;font-family:var(--f-head) !important;font-size:11px !important;letter-spacing:1.5px;text-transform:uppercase;text-shadow:0 0 5px var(--f-glow);text-decoration:none !important}
+html.fun00s.s-biomech #hs-vertical-nav :is(a,button):hover,
+html.fun00s.s-biomech #hs-vertical-nav :is([aria-current],[aria-selected=true]){background:linear-gradient(90deg,#2e8a0c,#0d3a02) !important}
+html.fun00s.s-biomech #hs-vertical-nav :is(a,button):hover *,
+html.fun00s.s-biomech #hs-vertical-nav :is([aria-current],[aria-selected=true]) *{color:var(--f-lime-hot) !important}
+/* table: ribbed rows, spaced-out Orbitron headers, one organic corner pair */
+html.fun00s.s-biomech.f-index [data-test-id=framework-data-table-container]{border-radius:2px 44px 2px 44px !important}
+html.fun00s.s-biomech.f-index [data-test-id=framework-data-table] th{font-family:var(--f-head) !important;letter-spacing:3px;text-transform:uppercase;font-size:12px !important}
+html.fun00s.s-biomech.f-index [data-test-id=framework-data-table] td{border-bottom:1px dashed rgba(110,255,60,.28) !important}
+html.fun00s.s-biomech.f-index [data-test-id=framework-data-table] td:first-child{border-left:5px solid #2e8a0c !important}
+/* board: columns are glass vials with metal caps; cards are chamfered tiles with a vein down the left */
+html.fun00s.s-biomech.f-index [data-test-id^=framework-data-column-]{
+  border:4px solid !important;border-color:#d49a6a #2a140c #150a05 #a8683f !important;border-radius:30px 30px 12px 12px !important;
+  background:linear-gradient(90deg,rgba(255,255,255,.07),transparent 18%,rgba(0,0,0,.35)),linear-gradient(#0f2208,#030a02) !important;
+  box-shadow:0 -5px 0 #6e3a20,0 5px 0 #6e3a20,0 0 14px rgba(110,255,60,.18) !important}
+html.fun00s.s-biomech.f-index [data-test-id=cdb-card]{border:0 !important;border-radius:0 !important;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px));
+  background:linear-gradient(135deg,rgba(110,255,60,.16),rgba(110,255,60,.03)) !important;box-shadow:inset 4px 0 0 #4ee01a !important}
+html.fun00s.s-biomech.f-index :is([data-test-id=cdb-card],[data-test-id^=cdb-column-header-]){color:var(--f-lime) !important}
+html.fun00s.s-biomech :is(button,[data-button-use],#hs-search-react,.fun00s-marquee){border-radius:20px 4px 20px 4px !important}
+/* the grille becomes a ribbed conduit with a green node; the equalizer is a bank of glowing vials */
+html.fun00s.s-biomech .fun00s-grille{
+  background:radial-gradient(circle at 50% 50%,#d4ff9a 0 3px,#6ee028 4px 7px,transparent 8px) 50% 50%/26px 26px no-repeat,
+    repeating-linear-gradient(90deg,#150a05 0 4px,#9a6040 4px 6px,#4e2a1a 6px 10px) !important;
+  border-radius:13px !important;box-shadow:inset 0 2px 3px #000,0 0 8px rgba(110,255,60,.35) !important}
+html.fun00s.s-biomech .fun00s-eq{background:linear-gradient(#050d03,#0f2208);border-color:#150a05 #b87a52 #d9a47c #150a05 !important;border-radius:16px 4px 16px 4px !important;gap:3px}
+html.fun00s.s-biomech .fun00s-eq i{border-radius:3px 3px 1px 1px;background:linear-gradient(90deg,rgba(255,255,255,.35) 0 20%,transparent 20%),linear-gradient(0deg,#1f7004,#6ee028 55%,#d4ff4a);box-shadow:0 0 6px var(--f-glow);animation-timing-function:ease-in-out}
 html.fun00s body{background:#0b0c0d radial-gradient(ellipse at 50% 0%,#1d2124,#050606 70%) !important}
 html.fun00s div:has(> main){background:transparent !important}
 
