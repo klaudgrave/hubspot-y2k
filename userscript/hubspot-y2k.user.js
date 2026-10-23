@@ -2,7 +2,7 @@
 // @name         HubSpot Y2K — Winamp-era skins for HubSpot
 // @namespace    https://github.com/klaudgrave/hubspot-y2k
 // @license      MIT
-// @version      0.7.1
+// @version      0.7.2
 // @description  Skins for HubSpot: chrome with a lime LCD, brushed copper with an amber LCD, a rusty biomechanical look with green vials, a 16-bit pixel quest look, and a classic Winamp 2 look with a stormy dark-blue twin. Purely cosmetic, client-side only. Toggle with Alt+Shift+Y (⌥⇧Y on Mac); cycle looks with Alt+Shift+T (⌥⇧T on Mac).
 // @match        https://app.hubspot.com/*
 // @run-at       document-start
@@ -234,6 +234,7 @@ html.fun00s.s-winamp :is(#hs-global-toolbar,#hs-vertical-nav),html.fun00s.s-wina
 html.fun00s.s-winamp #hs-global-toolbar{border-bottom:2px solid #14172a !important;box-shadow:inset 0 1px 0 #cfd5e8,0 2px 0 #000 !important}
 html.fun00s.s-winamp #hs-vertical-nav{border-right:2px solid #14172a !important;box-shadow:inset 1px 0 0 #cfd5e8,inset -1px 0 0 #000 !important}
 html.fun00s.s-winamp :is(button,[data-button-use]){border:2px solid !important;border-color:var(--f-bevel) !important;box-shadow:none !important;font-family:var(--f-ui) !important}
+html.fun00s.s-winamp :is([data-fun00s-fab],[data-fun00s-btn]){border:2px solid !important;border-color:var(--f-bevel) !important;box-shadow:none !important}
 html.fun00s.s-winamp :is(button,[data-button-use]):active{border-color:#14172a #cfd5e8 #cfd5e8 #14172a !important}
 html.fun00s.s-winamp .fun00s-screw{display:none !important}
 /* title bars: striped Winamp caption on the main window and on every board column */
@@ -667,10 +668,11 @@ html.fun00s [class*=Popover__StyledPopoverContainer] input{background:transparen
 html.fun00s [class*=Popover__StyledPopoverContainer] [data-button-use=primary]{background:var(--f-gel) !important}
 html.fun00s [class*=Popover__StyledPopoverContainer] [data-button-use=primary] *{color:var(--f-on-gel) !important;text-shadow:none}
 /* floating round buttons (scroll to top, hide/show the side panel): white by default, tagged from JS (see floaters()) */
-html.fun00s [data-fun00s-fab]{background:var(--f-chrome) !important;border:1px solid #2b2e30 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 2px 5px rgba(0,0,0,.7),0 0 8px var(--f-glow) !important}
-html.fun00s [data-fun00s-fab] :is(svg,path){color:var(--f-ink) !important;fill:currentColor !important}
-html.fun00s [data-fun00s-fab]:hover{filter:brightness(1.12)}
-html.fun00s.s-pixel [data-fun00s-fab]{border:2px solid #000 !important;box-shadow:0 0 0 2px #58b858,3px 3px 0 2px #000 !important}
+html.fun00s :is([data-fun00s-fab],[data-fun00s-btn],[class*=RightToolbarRail__PinCircularHover]){background:var(--f-chrome) !important;border:1px solid #2b2e30 !important;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 2px 5px rgba(0,0,0,.7),0 0 8px var(--f-glow) !important}
+html.fun00s :is([data-fun00s-fab],[data-fun00s-btn]) :is(svg,path){color:var(--f-ink) !important;fill:currentColor !important}
+html.fun00s [data-fun00s-btn],html.fun00s [data-fun00s-btn] *:not(svg):not(path){color:var(--f-ink) !important;text-shadow:none !important;font-weight:700}
+html.fun00s :is([data-fun00s-fab],[data-fun00s-btn]):hover{filter:brightness(1.12)}
+html.fun00s.s-pixel :is([data-fun00s-fab],[data-fun00s-btn]){border:2px solid #000 !important;box-shadow:0 0 0 2px #58b858,3px 3px 0 2px #000 !important}
 /* account menu: HubSpot gives it a plain white panel with no stable hook, so it is tagged from JS (see menus()) */
 html.fun00s [data-fun00s-menu]{background:var(--f-lcd-bg) !important;border:2px solid !important;border-color:var(--f-inset-border) !important;box-shadow:0 10px 24px rgba(0,0,0,.75),0 0 0 1px var(--f-ring) !important}
 html.fun00s [data-fun00s-menu] *{background-color:transparent !important;color:var(--f-lime) !important;font-family:var(--f-mono) !important;opacity:1 !important;text-shadow:0 0 4px var(--f-glow)}
@@ -841,17 +843,27 @@ html.fun00s #hs-global-toolbar .fun00s-marquee{margin-right:14px}
 
   // Floating icon buttons (scroll to top, hide right panel) have no stable hook either: tag small, text-less,
   // white, absolutely/fixed positioned buttons once.
+  // near-white counts too: some buttons are #f5f5f5-ish rather than pure white
+  const isLight = c => { const m = c.match(/^rgba?\((\d+), (\d+), (\d+)(?:, ([\d.]+))?\)$/); return !!m && +m[1] >= 232 && +m[2] >= 232 && +m[3] >= 232 && (m[4] === undefined || +m[4] > 0.9); };
   function floaters() {
     for (const b of document.querySelectorAll('button:not([data-fun00s-f])')) {
       const r = b.getBoundingClientRect();
       if (!r.width) continue;                                   // not laid out yet: look again next pass
       b.setAttribute('data-fun00s-f', '');
+      // any button HubSpot still paints plain white (Filter, Sort by, view switchers, pin…) gets the skin's chrome
+      if (!b.closest('[data-fun00s-menu]')) {
+        if (isLight(getComputedStyle(b).backgroundColor)) b.setAttribute('data-fun00s-btn', '');
+        else {                                                  // transparent button on a same-sized light wrapper (the right-rail pin)
+          const w = b.parentElement, wr = w && w.getBoundingClientRect();
+          if (wr && r.width <= 60 && Math.abs(wr.width - r.width) <= 6 && Math.abs(wr.height - r.height) <= 6 && isLight(getComputedStyle(w).backgroundColor)) w.setAttribute('data-fun00s-btn', '');
+        }
+      }
       if (b.textContent.trim() || !b.querySelector('svg') || r.width < 18 || r.width > 60 || r.height < 18 || r.height > 60) continue;
       let floating = false;
       for (let e = b, i = 0; e && e !== document.body && i < 3; e = e.parentElement, i++) {
         const cs = getComputedStyle(e);
         floating = floating || /^(fixed|absolute|sticky)$/.test(cs.position);
-        if (floating && cs.backgroundColor === 'rgb(255, 255, 255)' && e.getBoundingClientRect().width <= 60) { e.setAttribute('data-fun00s-fab', ''); break; }
+        if (floating && isLight(cs.backgroundColor) && e.getBoundingClientRect().width <= 60) { e.setAttribute('data-fun00s-fab', ''); break; }
       }
     }
   }
